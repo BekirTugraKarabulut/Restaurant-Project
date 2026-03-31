@@ -8,11 +8,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import static com.restaurant.config.RestApis.*;
 
 @RestController
-@RequestMapping(path = "/auth")
 @Tag(name = "RegisterController", description = "Controller for user registration")
 public class RegisterControllerImpl implements RegisterController {
 
@@ -22,7 +21,7 @@ public class RegisterControllerImpl implements RegisterController {
         this.registerService = registerService;
     }
 
-    @PostMapping(path = "/register")
+    @PostMapping(REGISTER)
     @Override
     public DtoCustomer register(@Valid @RequestBody RegisterCustomer registerCustomer) {
         return registerService.register(registerCustomer);

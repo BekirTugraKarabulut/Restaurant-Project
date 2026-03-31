@@ -17,7 +17,7 @@ import java.util.function.Function;
 public class JwtService {
 
     @Value("${secret-key}")
-    public static String secretKey;
+    public String secretKey;
 
     public String generateToken(UserDetails userDetails) {
 
@@ -58,7 +58,7 @@ public class JwtService {
     }
 
     public Key getKey(){
-        byte[] encodedKey = Base64.getEncoder().encode(secretKey.getBytes());
+        byte[] encodedKey = Base64.getDecoder().decode(secretKey);
         return Keys.hmacShaKeyFor(encodedKey);
     }
 

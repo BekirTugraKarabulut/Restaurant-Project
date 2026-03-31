@@ -19,6 +19,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthEntryPoint authEntryPoint;
     public static final String REGISTER = "/auth/register";
+    public static final String LOGIN = "/auth/login";
 
     public SecurityConfig(AuthenticationProvider authenticationProvider, JwtAuthenticationFilter jwtAuthenticationFilter, AuthEntryPoint authEntryPoint) {
         this.authenticationProvider = authenticationProvider;
@@ -33,6 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests.requestMatchers(
                                         REGISTER,
+                                        LOGIN,
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**" ,
                                         "/swagger-ui.html")
