@@ -36,12 +36,16 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         return refreshToken;
     }
 
+    public boolean isValidToken(Date expiredDate){
+        return new Date().before(expiredDate);
+    }
+
     @Override
     public AuthResponse refreshToken(DtoNewToken dtoNewToken) {
 
         Optional<RefreshToken> refreshToken = refreshTokenRepository.findByToken(dtoNewToken.getToken());
 
-        if(refreshToken.isPresent()) {
+        if(refreshToken.isPresent() && isValidToken(refreshToken.get().getExpiresAt())) {
             String accessToken = jwtService.generateToken(refreshToken.get().getCustomer());
             RefreshToken refreshNewToken = createRefreshToken(refreshToken.get().getCustomer());
             RefreshToken dbRefreshToken = refreshTokenRepository.save(refreshNewToken);
