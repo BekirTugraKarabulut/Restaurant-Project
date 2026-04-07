@@ -33,7 +33,8 @@ public class Customer implements UserDetails {
     private String phoneNumber;
 
     @Column(name = "address")
-    private String address;
+    @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL)
+    private List<Address> address;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")

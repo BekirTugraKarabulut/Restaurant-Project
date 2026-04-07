@@ -35,6 +35,7 @@ public class SecurityConfig {
                         authorizeRequests.requestMatchers(
                                         REGISTER,
                                         LOGIN,
+                                        "/saveAddress",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**" ,
                                         "/swagger-ui.html")
