@@ -4,9 +4,9 @@ import com.restaurant.controller.address.AddressController;
 import com.restaurant.dto.DtoAddress;
 import com.restaurant.dto.DtoAddressUI;
 import com.restaurant.service.address.AddressService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class AddressControllerImpl implements AddressController {
@@ -21,6 +21,12 @@ public class AddressControllerImpl implements AddressController {
     @PostMapping(path = "/saveAddress")
     public DtoAddress saveAddress(@RequestBody DtoAddressUI dtoAddressUI) {
         return addressService.saveAddress(dtoAddressUI);
+    }
+
+    @Override
+    @GetMapping(path = "/getAddressByUsername/{username}")
+    public List<DtoAddress> getAddressByUsername(@PathVariable(name = "username" , required = true) String username) {
+        return addressService.getAddressByUsername(username);
     }
 
 }

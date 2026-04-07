@@ -36,6 +36,7 @@ public class SecurityConfig {
                                         REGISTER,
                                         LOGIN,
                                         "/saveAddress",
+                                        "/getAddressByUsername/{username}",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**" ,
                                         "/swagger-ui.html")
