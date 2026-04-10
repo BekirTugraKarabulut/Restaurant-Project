@@ -1,0 +1,37 @@
+package com.restaurant.service.admin.foods.impl;
+
+import com.restaurant.dto.DtoAddFoods;
+import com.restaurant.dto.DtoFoods;
+import com.restaurant.model.Foods;
+import com.restaurant.repository.FoodsRepository;
+import com.restaurant.service.admin.foods.AdminFoodsService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AdminFoodsServiceImpl implements AdminFoodsService {
+
+    private final FoodsRepository foodsRepository;
+
+    public AdminFoodsServiceImpl(FoodsRepository foodsRepository) {
+        this.foodsRepository = foodsRepository;
+    }
+
+    @Override
+    public DtoFoods saveFood(DtoAddFoods dtoAddFoods) {
+
+        Foods foods = new Foods();
+        foods.setFoodName(dtoAddFoods.getFoodName());
+        foods.setDescription(dtoAddFoods.getDescription());
+        foods.setPrice(dtoAddFoods.getPrice());
+
+        Foods dbFoods = foodsRepository.save(foods);
+        DtoFoods dtoFoods = new DtoFoods();
+        dtoFoods.setFoodId(dbFoods.getFoodId());
+        dtoFoods.setFoodName(dbFoods.getFoodName());
+        dtoFoods.setDescription(dbFoods.getDescription());
+        dtoFoods.setPrice(dbFoods.getPrice());
+
+        return dtoFoods;
+    }
+
+}

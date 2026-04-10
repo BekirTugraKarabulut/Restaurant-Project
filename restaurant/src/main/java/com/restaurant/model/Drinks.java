@@ -18,7 +18,7 @@ public class Drinks {
     private Long drinkId;
 
     @Column(name = "drink_name")
-    private String drinktName;
+    private String drinkName;
 
     @Column(name = "description")
     private String description;
