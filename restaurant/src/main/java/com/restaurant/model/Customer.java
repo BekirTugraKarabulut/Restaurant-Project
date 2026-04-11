@@ -36,6 +36,9 @@ public class Customer implements UserDetails {
     @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL)
     private List<Address> address;
 
+    @Column(name = "profile_picture")
+    private String profilePicture;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
