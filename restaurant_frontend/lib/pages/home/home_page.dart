@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_frontend/pages/navigation_page/AboutUsPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CartPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CategoriesPage.dart';
-import 'package:restaurant_frontend/pages/navigation_page/ProfilePage.dart';
+import 'package:restaurant_frontend/pages/process/AddressAddPage.dart';
 import 'package:restaurant_frontend/services/customer/GetNameService.dart';
 import 'package:restaurant_frontend/services/favorites/FavoritesService.dart';
 
 class HomePage extends StatefulWidget {
 
   final String username;
-
   const HomePage({super.key, required this.username});
 
   @override
@@ -63,10 +63,14 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 10),
               Row(
-                children: const [
-                  Icon(Icons.location_on),
-                  SizedBox(width: 5),
-                  Text("Adres Ekleyiniz"),
+                children: [
+                  const Icon(Icons.location_on),
+                  const SizedBox(width: 5),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Addressaddpage(username: widget.username,)));
+                    },
+                      child: Text("Adres Ekleyiniz", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,decoration: TextDecoration.underline),)),
                 ],
               ),
               const SizedBox(height: 20),
@@ -168,7 +172,7 @@ class _HomePageState extends State<HomePage> {
       homeContent(),
       Categoriespage(username: widget.username),
       Cartpage(username: widget.username),
-      Profilepage(username: widget.username),
+      Aboutuspage(username: widget.username),
     ];
 
     return Scaffold(
@@ -217,8 +221,8 @@ class _HomePageState extends State<HomePage> {
             label: "Sepet",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profil",
+            icon: Icon(Icons.account_balance_sharp),
+            label: "Hakkımızda",
           ),
         ],
       ),
