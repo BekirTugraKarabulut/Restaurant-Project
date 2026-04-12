@@ -35,7 +35,9 @@ public class SecurityConfig {
                         authorizeRequests.requestMatchers(
                                         REGISTER,
                                         LOGIN,
+                                        "/favorites",
                                         "/admin/**",
+                                        "/customer/**",
                                         "/saveAddress",
                                         "/getAddressByUsername/{username}",
                                         "/swagger-ui/**",
