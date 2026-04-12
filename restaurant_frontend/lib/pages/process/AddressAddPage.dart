@@ -51,7 +51,10 @@ class _AddressaddpageState extends State<Addressaddpage> {
                 options: MapOptions(
                   initialCenter: selectedLocation,
                   initialZoom: 13,
-                  onTap: (tapPosition, point) {
+                  interactionOptions: const InteractionOptions(
+                    flags: InteractiveFlag.all,
+                  ),
+                  onTap: (TapPosition tapPosition, LatLng point) {
                     setState(() {
                       selectedLocation = point;
                     });

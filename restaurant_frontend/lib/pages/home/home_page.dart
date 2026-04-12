@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_frontend/pages/auth/login.dart';
 import 'package:restaurant_frontend/pages/navigation_page/AboutUsPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CartPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CategoriesPage.dart';
 import 'package:restaurant_frontend/pages/process/AddressAddPage.dart';
 import 'package:restaurant_frontend/services/customer/GetNameService.dart';
 import 'package:restaurant_frontend/services/favorites/FavoritesService.dart';
+import 'package:restaurant_frontend/services/address/AddressNameService.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -27,19 +29,22 @@ class _HomePageState extends State<HomePage> {
 
   final GetNameService getNameService = GetNameService();
   final FavoritesService favoritesService = FavoritesService();
+  final AddressNameService addressNameService = AddressNameService();
 
   Widget homeContent() {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white
+          decoration: const BoxDecoration(
+              color: Colors.white
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               const SizedBox(height: 20),
+
               FutureBuilder<String?>(
                 future: getNameService.getName(widget.username),
                 builder: (context, snapshot) {
@@ -62,16 +67,40 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               const SizedBox(height: 10),
-              Row(
-                children: [
-                  const Icon(Icons.location_on),
-                  const SizedBox(width: 5),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Addressaddpage(username: widget.username,)));
-                    },
-                      child: Text("Adres Ekleyiniz", style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,decoration: TextDecoration.underline),)),
-                ],
+              FutureBuilder<String?>(
+                future: addressNameService.getAddressName(widget.username),
+                builder: (context, snapshot) {
+                  String addressText = "Adres Ekleyiniz";
+                  if(snapshot.hasData && snapshot.data!.isNotEmpty){
+                    addressText = snapshot.data!;
+                  }
+                  return Row(
+                    children: [
+                      const Icon(Icons.location_on),
+                      const SizedBox(width: 5),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Addressaddpage(username: widget.username),
+                            ),
+                          ).then((value){
+                            setState(() {});
+                          });
+                        },
+                        child: Text(
+                          addressText,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: 20),
               SizedBox(
@@ -103,61 +132,80 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 5),
               FutureBuilder(
-                  future: favoritesService.favorites(),
-                  builder: (context, snapshot) {
-                    if(snapshot.hasData){
-                      var favorites = snapshot.data!;
-                      return ListView.builder(
-                          itemCount: favorites.length,
-                           shrinkWrap: true,
-                           physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            var favorite = favorites[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.black
-                                ),
-                                child: Card(
-                                  color: Colors.white,
-                                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                future: favoritesService.favorites(),
+                builder: (context, snapshot) {
+                  if(snapshot.hasData){
+                    var favorites = snapshot.data!;
+                    return ListView.builder(
+                      itemCount: favorites.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        var favorite = favorites[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.black
+                            ),
+                            child: Card(
+                              color: Colors.white,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Image.asset(
+                                    "images/${favorite["imageUrl"]}",
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                                  Column(
                                     children: [
-                                      Image.asset("images/${favorite["imageUrl"]}" , width: 100 , height: 100,),
-                                      Column(
-                                       children: [
-                                         Text(favorite["name"] , style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-                                         Text(favorite["price"].toString() + " ₺" , style: TextStyle(color: Colors.red , fontWeight: FontWeight.bold),),
-                                       ],
+                                      Text(
+                                        favorite["name"],
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
                                       ),
-                                      ElevatedButton(
-                                          style: ButtonStyle(
-                                            shape: WidgetStatePropertyAll(
-                                              RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(10),
-                                              ),
-                                            ),
-                                            backgroundColor: WidgetStatePropertyAll(
-                                              Colors.red,
-                                            )
-                                          )
-                                          ,onPressed: (){
-
-                                      }, child: Text("Ekle" , style: TextStyle(color: Colors.white),))
+                                      Text(
+                                        "${favorite["price"]} ₺",
+                                        style: const TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                ),
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                        shape: WidgetStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                        backgroundColor: const WidgetStatePropertyAll(
+                                          Colors.red,
+                                        )
+                                    ),
+                                    onPressed: (){},
+                                    child: const Text(
+                                      "Ekle",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  )
+                                ],
                               ),
-                            );
-                          },
-                      );
-                    }else{
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                  },
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
               )
-
             ],
           ),
         ),
@@ -177,6 +225,9 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+        }, icon:  Icon(Icons.login)),
         backgroundColor: Colors.red,
         title: const Text(
           "Anasayfa",
@@ -196,7 +247,9 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
+
       body: pages[selectedIndex],
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         selectedItemColor: Colors.red,
@@ -208,22 +261,27 @@ class _HomePageState extends State<HomePage> {
           });
         },
         items: const [
+
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Anasayfa",
           ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.fastfood),
             label: "Ürünler",
           ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: "Sepet",
           ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.account_balance_sharp),
             label: "Hakkımızda",
           ),
+
         ],
       ),
     );

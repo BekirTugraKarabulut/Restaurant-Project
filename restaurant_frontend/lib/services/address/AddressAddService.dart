@@ -6,7 +6,7 @@ class AddressAddService {
 
     Future<bool> addAddress(String username , String street , String addressTitle) async {
       
-      final url = Uri.parse("http://10.0.2.2:8090/saveAddress");
+      final url = Uri.parse("http://10.0.2.2:8090/address/saveAddress");
 
       final response = await http.post(
 
