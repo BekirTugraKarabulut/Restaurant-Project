@@ -230,8 +230,8 @@ class _HomePageState extends State<HomePage> {
         }, icon:  Icon(Icons.login)),
         backgroundColor: Colors.red,
         title: const Text(
-          "Anasayfa",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          "Tastyra",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
         ),
         centerTitle: true,
         actions: [
