@@ -13,7 +13,7 @@ public class DtoAddress {
 
     private String street;
 
-    private String city;
+    private String addressTitle;
 
     private DtoCustomer dtoCustomer;
 

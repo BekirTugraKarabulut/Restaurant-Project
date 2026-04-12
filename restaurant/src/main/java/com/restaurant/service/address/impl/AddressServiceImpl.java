@@ -34,7 +34,7 @@ public class AddressServiceImpl implements AddressService {
     public DtoAddress saveAddress(DtoAddressUI dtoAddressUI) {
 
         Address address = new Address();
-        address.setCity(dtoAddressUI.getCity());
+        address.setAddressTitle(dtoAddressUI.getAddressTitle());
         address.setStreet(dtoAddressUI.getStreet());
 
         Optional<Customer> customer = customerRepository.findByUsername(dtoAddressUI.getDtoCustomer().getUsername());

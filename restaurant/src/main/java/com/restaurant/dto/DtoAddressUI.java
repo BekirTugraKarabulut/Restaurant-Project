@@ -13,7 +13,7 @@ public class DtoAddressUI {
 
     private String street;
 
-    private String city;
+    private String addressTitle;
 
     private DtoCustomer dtoCustomer;
 

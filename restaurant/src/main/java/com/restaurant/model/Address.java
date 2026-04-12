@@ -20,8 +20,8 @@ public class Address {
     @Column(name = "street")
     private String street;
 
-    @Column(name = "city")
-    private String city;
+    @Column(name = "address_title")
+    private String addressTitle;
 
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
