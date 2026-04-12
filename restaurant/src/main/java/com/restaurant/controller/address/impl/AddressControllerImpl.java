@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/address")
 public class AddressControllerImpl implements AddressController {
 
     private final AddressService addressService;
@@ -27,6 +28,12 @@ public class AddressControllerImpl implements AddressController {
     @GetMapping(path = "/getAddressByUsername/{username}")
     public List<DtoAddress> getAddressByUsername(@PathVariable(name = "username" , required = true) String username) {
         return addressService.getAddressByUsername(username);
+    }
+
+    @Override
+    @GetMapping(path = "/getAddressName/{username}")
+    public String getAddressName(@PathVariable(name = "username" , required = true) String username) {
+        return addressService.getAddressName(username);
     }
 
 }

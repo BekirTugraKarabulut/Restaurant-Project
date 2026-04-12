@@ -11,4 +11,5 @@ public interface AddressController {
 
     public List<DtoAddress> getAddressByUsername(String username);
 
+    public String getAddressName(String username);
 }

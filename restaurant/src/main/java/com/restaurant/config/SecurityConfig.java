@@ -38,8 +38,7 @@ public class SecurityConfig {
                                         "/favorites",
                                         "/admin/**",
                                         "/customer/**",
-                                        "/saveAddress",
-                                        "/getAddressByUsername/{username}",
+                                        "/address/**",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**" ,
                                         "/swagger-ui.html")

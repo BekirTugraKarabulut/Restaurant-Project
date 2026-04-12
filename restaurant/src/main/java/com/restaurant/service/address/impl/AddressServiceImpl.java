@@ -75,4 +75,17 @@ public class AddressServiceImpl implements AddressService {
 
         return dtoAddressList;
     }
+
+    @Override
+    public String getAddressName(String username) {
+
+        Optional<Address> address = addressRepository.findByCustomer_Username(username).stream().findFirst();
+
+        if(address.isPresent()){
+            return address.get().getStreet();
+        }else{
+            throw new BaseException(new ErrorMessage(MessageType.CUSTOMER_ADDRESS_NOT_FOUND , "Customer with username " + username + " does not have any address"));
+        }
+
+    }
 }
