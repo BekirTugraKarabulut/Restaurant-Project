@@ -121,8 +121,26 @@ class _HomePageState extends State<HomePage> {
                                   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
                                       Image.asset("images/${favorite["imageUrl"]}" , width: 100 , height: 100,),
-                                      Text(favorite["name"] , style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
-                                      Text(favorite["price"].toString() + " ₺" , style: TextStyle(color: Colors.red , fontWeight: FontWeight.bold),),
+                                      Column(
+                                       children: [
+                                         Text(favorite["name"] , style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),),
+                                         Text(favorite["price"].toString() + " ₺" , style: TextStyle(color: Colors.red , fontWeight: FontWeight.bold),),
+                                       ],
+                                      ),
+                                      ElevatedButton(
+                                          style: ButtonStyle(
+                                            shape: WidgetStatePropertyAll(
+                                              RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(10),
+                                              ),
+                                            ),
+                                            backgroundColor: WidgetStatePropertyAll(
+                                              Colors.red,
+                                            )
+                                          )
+                                          ,onPressed: (){
+
+                                      }, child: Text("Ekle" , style: TextStyle(color: Colors.white),))
                                     ],
                                   ),
                                 ),
