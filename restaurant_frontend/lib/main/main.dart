@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
         "/home": (context) => const FirstPage(),
         "/register": (context) => const Register(),
         "/login": (context) => const Login(),
-        "/homepage": (context) => const HomePage(),
       },
       title: 'Flutter Demo',
       theme: ThemeData(
