@@ -18,7 +18,7 @@ public class DtoCustomer {
 
     private String phoneNumber;
 
-    private String address;
+    private DtoAddress dtoAddress;
 
     private Role role;
 
