@@ -4,6 +4,7 @@ import 'package:restaurant_frontend/pages/navigation_page/AboutUsPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CartPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CategoriesPage.dart';
 import 'package:restaurant_frontend/pages/process/AddressAddPage.dart';
+import 'package:restaurant_frontend/pages/process/ProfilePage.dart';
 import 'package:restaurant_frontend/services/customer/GetNameService.dart';
 import 'package:restaurant_frontend/services/favorites/FavoritesService.dart';
 import 'package:restaurant_frontend/services/address/AddressNameService.dart';
@@ -225,9 +226,6 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
-        }, icon:  Icon(Icons.login)),
         backgroundColor: Colors.red,
         title: const Text(
           "Tastyra",
@@ -241,15 +239,17 @@ class _HomePageState extends State<HomePage> {
               height: 40,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset("images/account.jpeg"),
+                child: GestureDetector(
+                     onTap: () {
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => Profilepage(username: widget.username,)));
+                     },
+                    child: Image.asset("images/account.jpeg")),
               ),
             ),
           )
         ],
       ),
-
       body: pages[selectedIndex],
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         selectedItemColor: Colors.red,
