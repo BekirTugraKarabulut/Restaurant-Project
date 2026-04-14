@@ -12,19 +12,19 @@ class Categoriespage extends StatefulWidget {
 class _CategoriespageState extends State<Categoriespage> {
 
   final List<String> categories = [
-    "Tümü",
     "Yemekler",
     "Tatlılar",
-    "İçecekler"
+    "İçecekler",
+    "Atıştırmalık"
   ];
 
   int selectedIndex = 0;
 
   final List<String> images = [
-    "https://cdn-icons-png.flaticon.com/512/1046/1046857.png",
     "https://cdn-icons-png.flaticon.com/512/3075/3075977.png",
     "https://cdn-icons-png.flaticon.com/512/992/992754.png",
-    "https://cdn-icons-png.flaticon.com/512/2405/2405479.png"
+    "https://cdn-icons-png.flaticon.com/512/2405/2405479.png",
+    "https://cdn-icons-png.flaticon.com/512/1046/1046786.png"
   ];
 
   @override
