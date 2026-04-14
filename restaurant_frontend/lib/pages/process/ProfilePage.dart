@@ -191,7 +191,11 @@ class _ProfilepageState extends State<Profilepage> {
                   ,onPressed: (){
 
                     phoneNumberPutService.putPhoneNumber(widget.username, phoneNumberController.text);
-
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Bilgiler Güncellendi."),
+                      action: SnackBarAction(label: "Tamam", onPressed: (){}),
+                      )
+                    );
                   }, child: Text("Güncelle" , style: TextStyle(color:  Colors.white , fontWeight: FontWeight.bold),)),
                 )
             ],
