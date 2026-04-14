@@ -10,6 +10,7 @@ import com.restaurant.model.Customer;
 import com.restaurant.repository.AddressByCustomerRepository;
 import com.restaurant.repository.CustomerRepository;
 import com.restaurant.service.customer.profile.CustomerProfileService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -51,5 +52,21 @@ public class CustomerProfileServiceImpl implements CustomerProfileService {
             throw new BaseException(new ErrorMessage(MessageType.CUSTOMER_NOT_FOUND, username));
         }
 
+    }
+
+    @Override
+    public DtoCustomer phoneNumberAdd(String username , String phoneNumber) {
+
+        Optional<Customer> customer = customerRepository.findByUsername(username);
+
+        if(customer.isPresent()){
+            customer.get().setPhoneNumber(phoneNumber);
+            Customer dbCustomer = customerRepository.save(customer.get());
+            DtoCustomer dtoCustomer = new DtoCustomer();
+            BeanUtils.copyProperties(dbCustomer, dtoCustomer);
+            return dtoCustomer;
+        }else{
+            throw new BaseException(new ErrorMessage(MessageType.CUSTOMER_NOT_FOUND, username));
+        }
     }
 }

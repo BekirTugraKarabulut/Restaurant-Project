@@ -6,4 +6,6 @@ public interface CustomerProfileService {
 
     public DtoCustomer getCustomerProfile(String username);
 
+    public DtoCustomer phoneNumberAdd(String username , String phoneNumber);
+
 }
