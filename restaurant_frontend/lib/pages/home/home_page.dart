@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_frontend/pages/auth/login.dart';
 import 'package:restaurant_frontend/pages/navigation_page/AboutUsPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CartPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CategoriesPage.dart';
@@ -241,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                 borderRadius: BorderRadius.circular(20),
                 child: GestureDetector(
                      onTap: () {
-                       Navigator.push(context, MaterialPageRoute(builder: (context) => Profilepage(username: widget.username,)));
+                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Profilepage(username: widget.username,)));
                      },
                     child: Image.asset("images/account.jpeg")),
               ),

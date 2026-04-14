@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_frontend/pages/auth/login.dart';
+import 'package:restaurant_frontend/pages/home/home_page.dart';
 import 'package:restaurant_frontend/pages/process/CustomerAddressPage.dart';
 import 'package:restaurant_frontend/services/customer/GetCustomerInfo.dart';
+import 'package:restaurant_frontend/services/customer/PhoneNumberPutService.dart';
 
 class Profilepage extends StatefulWidget {
 
@@ -15,6 +17,8 @@ class Profilepage extends StatefulWidget {
 class _ProfilepageState extends State<Profilepage> {
 
   final GetCustomerInfo getCustomerInfo = GetCustomerInfo();
+  final PhoneNumberPutService phoneNumberPutService = PhoneNumberPutService();
+  var phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +37,31 @@ class _ProfilepageState extends State<Profilepage> {
           Padding(
             padding: const EdgeInsets.only(right: 5),
             child: IconButton(onPressed: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Çıkış Yaptınız"),
-                action: SnackBarAction(label: "Tamam", onPressed: (){}),
-                )
-              );
-              return;
+              showDialog(context: context, builder: (context) {
+                return AlertDialog(
+                  contentPadding: EdgeInsets.all(10),
+                  backgroundColor: Colors.white,
+                  title: Text("Çıkış Yapmak İstediğinize Emin Misiniz ?" , style: TextStyle(color:  Colors.red , fontSize: 20),),
+                  actions: [
+                    TextButton(onPressed: (){
+                      Navigator.pop(context);
+                    }, child: Text("Hayır" , style: TextStyle(color: Colors.red),)),
+                    TextButton(onPressed: (){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Çıkış Yaptınız"),
+                            action: SnackBarAction(label: "Tamam", onPressed: (){}),
+                          )
+                      );
+                    }, child: Text("Evet" , style: TextStyle(color: Colors.red),))
+                  ],
+                );
+              },);
             }, icon: Icon(Icons.logout, color: Colors.white,)),
           )
         ],
         leading: IconButton(onPressed: (){
-          Navigator.pop(context);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(username: widget.username)));
         }, icon: Icon(Icons.arrow_back_ios_new_rounded , color: Colors.white,)),
         title: Text("Profil" , style: TextStyle(color: Colors.white),),
       ),
@@ -122,6 +139,7 @@ class _ProfilepageState extends State<Profilepage> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextField(
+                                controller: phoneNumberController,
                                 decoration: InputDecoration(
                                     suffixIcon: Icon(Icons.phone , color:  Colors.red,),
                                     hintStyle: TextStyle(color: Colors.black),
@@ -170,7 +188,11 @@ class _ProfilepageState extends State<Profilepage> {
                       ),
                     )
                   )
-                  ,onPressed: (){}, child: Text("Güncelle" , style: TextStyle(color:  Colors.white , fontWeight: FontWeight.bold),)),
+                  ,onPressed: (){
+
+                    phoneNumberPutService.putPhoneNumber(widget.username, phoneNumberController.text);
+
+                  }, child: Text("Güncelle" , style: TextStyle(color:  Colors.white , fontWeight: FontWeight.bold),)),
                 )
             ],
           ),
