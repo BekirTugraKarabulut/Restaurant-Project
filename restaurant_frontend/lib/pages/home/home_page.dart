@@ -234,6 +234,12 @@ class _HomePageState extends State<HomePage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
+            child: IconButton(onPressed: (){
+
+            }, icon: Icon(Icons.chat , color: Colors.white,)),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
             child: SizedBox(
               height: 40,
               child: ClipRRect(

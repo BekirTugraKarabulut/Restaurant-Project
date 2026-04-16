@@ -106,7 +106,9 @@ class _LoginState extends State<Login> {
                             action: SnackBarAction(label: "Tamam", onPressed: (){}),
                             )
                           );
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(username: username.text,)));
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(builder:(context) => HomePage(username: username.text) ),
+                              (route) => false);
                         }else{
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text("Giriş Başarısız"),
