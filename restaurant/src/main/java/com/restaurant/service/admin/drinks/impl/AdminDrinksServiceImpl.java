@@ -3,8 +3,10 @@ package com.restaurant.service.admin.drinks.impl;
 import com.restaurant.dto.DtoAddDrinks;
 import com.restaurant.dto.DtoDrinks;
 import com.restaurant.model.Drinks;
+import com.restaurant.model.ProductType;
 import com.restaurant.repository.DrinksRepository;
 import com.restaurant.service.admin.drinks.AdminDrinksService;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class AdminDrinksServiceImpl implements AdminDrinksService {
         this.drinksRepository = drinksRepository;
     }
 
+    @CacheEvict(value = "drinksCache", key = "'allDrinks'")
     @Override
     public DtoDrinks saveDrinks(DtoAddDrinks dtoAddDrinks) {
 
@@ -28,6 +31,7 @@ public class AdminDrinksServiceImpl implements AdminDrinksService {
         drinks.setDescription(dtoAddDrinks.getDescription());
         drinks.setPrice(dtoAddDrinks.getPrice());
         drinks.setImageUrl(dtoAddDrinks.getImageUrl());
+        drinks.setProductType(ProductType.DRINK);
         Drinks savedDrinks = drinksRepository.save(drinks);
 
         DtoDrinks dtoDrinks = new DtoDrinks();
@@ -36,11 +40,12 @@ public class AdminDrinksServiceImpl implements AdminDrinksService {
         dtoDrinks.setDescription(savedDrinks.getDescription());
         dtoDrinks.setPrice(savedDrinks.getPrice());
         dtoDrinks.setImageUrl(savedDrinks.getImageUrl());
+        dtoDrinks.setProductType(savedDrinks.getProductType());
 
         return dtoDrinks;
     }
 
-    @Cacheable(value = "drinksCache", key = "#root.methodName")
+    @Cacheable(value = "drinksCache", key = "'allDrinks'")
     @Override
     public List<DtoDrinks> getAllDrinks() {
 
@@ -57,11 +62,12 @@ public class AdminDrinksServiceImpl implements AdminDrinksService {
                 dtoDrinks.setDescription(drinks.getDescription());
                 dtoDrinks.setPrice(drinks.getPrice());
                 dtoDrinks.setImageUrl(drinks.getImageUrl());
+                dtoDrinks.setProductType(drinks.getProductType());
                 dtoDrinksList.add(dtoDrinks);
-                return dtoDrinksList;
+
             }
+            return dtoDrinksList;
         }
 
-        return null;
     }
 }

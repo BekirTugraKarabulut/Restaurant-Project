@@ -1,5 +1,6 @@
 package com.restaurant.dto;
 
+import com.restaurant.model.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,7 @@ public class DtoDesserts implements Serializable {
     private Integer price;
 
     private String imageUrl;
+
+    private ProductType productType;
 
 }

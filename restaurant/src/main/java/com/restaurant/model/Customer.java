@@ -46,6 +46,9 @@ public class Customer implements UserDetails {
     @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL)
     private List<RefreshToken> refreshTokens;
 
+    @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL)
+    private List<Cart> carts;
+
     @Override
     public String getUsername(){
         return username;

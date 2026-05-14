@@ -2,9 +2,11 @@ package com.restaurant.service.admin.snacks.impl;
 
 import com.restaurant.dto.DtoAddSnacks;
 import com.restaurant.dto.DtoSnacks;
+import com.restaurant.model.ProductType;
 import com.restaurant.model.Snacks;
 import com.restaurant.repository.SnacksRepository;
 import com.restaurant.service.admin.snacks.AdminSnacksService;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class AdminSnackServiceImpl implements AdminSnacksService {
         this.snacksRepository = snacksRepository;
     }
 
-
+    @CacheEvict(value = "snacksCache", key = "'allSnacks'")
     @Override
     public DtoSnacks saveSnack(DtoAddSnacks dtoAddSnacks) {
 
@@ -28,6 +30,7 @@ public class AdminSnackServiceImpl implements AdminSnacksService {
         snack.setDescription(dtoAddSnacks.getDescription());
         snack.setPrice(dtoAddSnacks.getPrice());
         snack.setImageUrl(dtoAddSnacks.getImageUrl());
+        snack.setProductType(ProductType.SNACK);
 
         Snacks dbSnack = snacksRepository.save(snack);
         DtoSnacks dtoSnacks = new DtoSnacks();
@@ -36,6 +39,7 @@ public class AdminSnackServiceImpl implements AdminSnacksService {
         dtoSnacks.setDescription(dbSnack.getDescription());
         dtoSnacks.setPrice(dbSnack.getPrice());
         dtoSnacks.setImageUrl(dbSnack.getImageUrl());
+        dtoSnacks.setProductType(dbSnack.getProductType());
 
         return dtoSnacks;
     }
@@ -52,6 +56,7 @@ public class AdminSnackServiceImpl implements AdminSnacksService {
             dtoSnacks.setDescription(snack.getDescription());
             dtoSnacks.setPrice(snack.getPrice());
             dtoSnacks.setImageUrl(snack.getImageUrl());
+            dtoSnacks.setProductType(snack.getProductType());
             return dtoSnacks;
         }).toList();
 

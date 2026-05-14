@@ -3,8 +3,10 @@ package com.restaurant.service.admin.desserts.impl;
 import com.restaurant.dto.DtoAddDesserts;
 import com.restaurant.dto.DtoDesserts;
 import com.restaurant.model.Desserts;
+import com.restaurant.model.ProductType;
 import com.restaurant.repository.DessertsRepository;
 import com.restaurant.service.admin.desserts.AdminDessertsService;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ public class AdminDessertsServiceImpl implements AdminDessertsService {
         this.dessertsRepository = dessertsRepository;
     }
 
+    @CacheEvict(value = "dessertsCache" , key = "'allDesserts'")
     @Override
     public DtoDesserts saveDesserts(DtoAddDesserts dtoAddDesserts) {
 
@@ -28,6 +31,7 @@ public class AdminDessertsServiceImpl implements AdminDessertsService {
         desserts.setDescription(dtoAddDesserts.getDescription());
         desserts.setPrice(dtoAddDesserts.getPrice());
         desserts.setImageUrl(dtoAddDesserts.getImageUrl());
+        desserts.setProductType(ProductType.DESSERT);
 
         Desserts dbDesserts = dessertsRepository.save(desserts);
         DtoDesserts dtoDesserts = new DtoDesserts();
@@ -36,11 +40,12 @@ public class AdminDessertsServiceImpl implements AdminDessertsService {
         dtoDesserts.setDescription(dbDesserts.getDescription());
         dtoDesserts.setPrice(dbDesserts.getPrice());
         dtoDesserts.setImageUrl(dbDesserts.getImageUrl());
+        dtoDesserts.setProductType(dbDesserts.getProductType());
 
         return dtoDesserts;
     }
 
-    @Cacheable(value = "dessertsCache")
+    @Cacheable(value = "dessertsCache" , key = "'allDesserts'")
     @Override
     public List<DtoDesserts> getAllDesserts() {
 
@@ -57,12 +62,12 @@ public class AdminDessertsServiceImpl implements AdminDessertsService {
                 dtoDessert.setDescription(desserts.getDescription());
                 dtoDessert.setPrice(desserts.getPrice());
                 dtoDessert.setImageUrl(desserts.getImageUrl());
+                dtoDessert.setProductType(ProductType.DESSERT);
                 dtoDesserts.add(dtoDessert);
-                return dtoDesserts;
             }
+            return dtoDesserts;
         }
 
-        return null;
     }
 
 }
