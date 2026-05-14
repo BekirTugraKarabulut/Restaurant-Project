@@ -16,4 +16,7 @@ public class DtoAddSnacks {
     private String description;
 
     private Integer price;
+
+    private String imageUrl;
+
 }

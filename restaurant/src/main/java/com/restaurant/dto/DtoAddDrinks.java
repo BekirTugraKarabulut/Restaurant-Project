@@ -15,4 +15,6 @@ public class DtoAddDrinks {
 
     private Integer price;
 
+    private String imageUrl;
+
 }

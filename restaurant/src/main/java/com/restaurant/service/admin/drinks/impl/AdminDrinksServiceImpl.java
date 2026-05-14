@@ -27,6 +27,7 @@ public class AdminDrinksServiceImpl implements AdminDrinksService {
         drinks.setDrinkName(dtoAddDrinks.getDrinkName());
         drinks.setDescription(dtoAddDrinks.getDescription());
         drinks.setPrice(dtoAddDrinks.getPrice());
+        drinks.setImageUrl(dtoAddDrinks.getImageUrl());
         Drinks savedDrinks = drinksRepository.save(drinks);
 
         DtoDrinks dtoDrinks = new DtoDrinks();
@@ -34,6 +35,7 @@ public class AdminDrinksServiceImpl implements AdminDrinksService {
         dtoDrinks.setDrinkName(savedDrinks.getDrinkName());
         dtoDrinks.setDescription(savedDrinks.getDescription());
         dtoDrinks.setPrice(savedDrinks.getPrice());
+        dtoDrinks.setImageUrl(savedDrinks.getImageUrl());
 
         return dtoDrinks;
     }
@@ -54,6 +56,7 @@ public class AdminDrinksServiceImpl implements AdminDrinksService {
                 dtoDrinks.setDrinkName(drinks.getDrinkName());
                 dtoDrinks.setDescription(drinks.getDescription());
                 dtoDrinks.setPrice(drinks.getPrice());
+                dtoDrinks.setImageUrl(drinks.getImageUrl());
                 dtoDrinksList.add(dtoDrinks);
                 return dtoDrinksList;
             }

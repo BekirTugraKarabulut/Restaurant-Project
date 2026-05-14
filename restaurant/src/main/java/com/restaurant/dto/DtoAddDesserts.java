@@ -17,4 +17,6 @@ public class DtoAddDesserts {
 
     private Integer price;
 
+    private String imageUrl;
+
 }

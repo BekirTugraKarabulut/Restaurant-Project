@@ -27,6 +27,7 @@ public class AdminSnackServiceImpl implements AdminSnacksService {
         snack.setSnackName(dtoAddSnacks.getSnackName());
         snack.setDescription(dtoAddSnacks.getDescription());
         snack.setPrice(dtoAddSnacks.getPrice());
+        snack.setImageUrl(dtoAddSnacks.getImageUrl());
 
         Snacks dbSnack = snacksRepository.save(snack);
         DtoSnacks dtoSnacks = new DtoSnacks();
@@ -34,6 +35,7 @@ public class AdminSnackServiceImpl implements AdminSnacksService {
         dtoSnacks.setSnackName(dbSnack.getSnackName());
         dtoSnacks.setDescription(dbSnack.getDescription());
         dtoSnacks.setPrice(dbSnack.getPrice());
+        dtoSnacks.setImageUrl(dbSnack.getImageUrl());
 
         return dtoSnacks;
     }
@@ -49,6 +51,7 @@ public class AdminSnackServiceImpl implements AdminSnacksService {
             dtoSnacks.setSnackName(snack.getSnackName());
             dtoSnacks.setDescription(snack.getDescription());
             dtoSnacks.setPrice(snack.getPrice());
+            dtoSnacks.setImageUrl(snack.getImageUrl());
             return dtoSnacks;
         }).toList();
 

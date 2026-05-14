@@ -27,6 +27,7 @@ public class AdminDessertsServiceImpl implements AdminDessertsService {
         desserts.setDessertName(dtoAddDesserts.getDessertName());
         desserts.setDescription(dtoAddDesserts.getDescription());
         desserts.setPrice(dtoAddDesserts.getPrice());
+        desserts.setImageUrl(dtoAddDesserts.getImageUrl());
 
         Desserts dbDesserts = dessertsRepository.save(desserts);
         DtoDesserts dtoDesserts = new DtoDesserts();
@@ -34,6 +35,7 @@ public class AdminDessertsServiceImpl implements AdminDessertsService {
         dtoDesserts.setDessertName(dbDesserts.getDessertName());
         dtoDesserts.setDescription(dbDesserts.getDescription());
         dtoDesserts.setPrice(dbDesserts.getPrice());
+        dtoDesserts.setImageUrl(dbDesserts.getImageUrl());
 
         return dtoDesserts;
     }
@@ -54,6 +56,7 @@ public class AdminDessertsServiceImpl implements AdminDessertsService {
                 dtoDessert.setDessertName(desserts.getDessertName());
                 dtoDessert.setDescription(desserts.getDescription());
                 dtoDessert.setPrice(desserts.getPrice());
+                dtoDessert.setImageUrl(desserts.getImageUrl());
                 dtoDesserts.add(dtoDessert);
                 return dtoDesserts;
             }

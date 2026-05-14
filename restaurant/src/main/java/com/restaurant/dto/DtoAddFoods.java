@@ -15,4 +15,6 @@ public class DtoAddFoods {
 
     private Integer price;
 
+    private String imageUrl;
+
 }

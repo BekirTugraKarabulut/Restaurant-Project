@@ -19,4 +19,6 @@ public class DtoSnacks implements Serializable {
 
     private Integer price;
 
+    private String imageUrl;
+
 }

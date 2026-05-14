@@ -19,4 +19,6 @@ public class DtoDesserts implements Serializable {
 
     private Integer price;
 
+    private String imageUrl;
+
 }

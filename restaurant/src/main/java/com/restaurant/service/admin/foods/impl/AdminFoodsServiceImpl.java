@@ -26,6 +26,7 @@ public class AdminFoodsServiceImpl implements AdminFoodsService {
         foods.setFoodName(dtoAddFoods.getFoodName());
         foods.setDescription(dtoAddFoods.getDescription());
         foods.setPrice(dtoAddFoods.getPrice());
+        foods.setImageUrl(dtoAddFoods.getImageUrl());
 
         Foods dbFoods = foodsRepository.save(foods);
         DtoFoods dtoFoods = new DtoFoods();
@@ -33,6 +34,7 @@ public class AdminFoodsServiceImpl implements AdminFoodsService {
         dtoFoods.setFoodName(dbFoods.getFoodName());
         dtoFoods.setDescription(dbFoods.getDescription());
         dtoFoods.setPrice(dbFoods.getPrice());
+        dtoFoods.setImageUrl(dbFoods.getImageUrl());
 
         return dtoFoods;
     }
@@ -48,6 +50,7 @@ public class AdminFoodsServiceImpl implements AdminFoodsService {
             dtoFoods.setFoodName(foods.getFoodName());
             dtoFoods.setDescription(foods.getDescription());
             dtoFoods.setPrice(foods.getPrice());
+            dtoFoods.setImageUrl(foods.getImageUrl());
             return dtoFoods;
         }).toList();
 

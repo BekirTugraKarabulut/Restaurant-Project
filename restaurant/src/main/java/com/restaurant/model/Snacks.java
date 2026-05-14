@@ -26,4 +26,7 @@ public class Snacks {
     @Column(name = "price")
     private Integer price;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
 }
