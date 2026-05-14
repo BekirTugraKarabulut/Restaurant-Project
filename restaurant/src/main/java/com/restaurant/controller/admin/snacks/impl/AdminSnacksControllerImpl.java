@@ -4,10 +4,9 @@ import com.restaurant.controller.admin.snacks.AdminSnacksController;
 import com.restaurant.dto.DtoAddSnacks;
 import com.restaurant.dto.DtoSnacks;
 import com.restaurant.service.admin.snacks.AdminSnacksService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -23,6 +22,12 @@ public class AdminSnacksControllerImpl implements AdminSnacksController {
     @PostMapping(path = "/add/snack")
     public DtoSnacks saveSnack(@RequestBody DtoAddSnacks dtoAddSnacks) {
         return adminSnacksService.saveSnack(dtoAddSnacks);
+    }
+
+    @Override
+    @GetMapping(path = "/get/snacks")
+    public List<DtoSnacks> getAllSnacks() {
+        return adminSnacksService.getAllSnacks();
     }
 
 }

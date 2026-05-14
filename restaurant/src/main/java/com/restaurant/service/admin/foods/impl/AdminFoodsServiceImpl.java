@@ -7,6 +7,8 @@ import com.restaurant.repository.FoodsRepository;
 import com.restaurant.service.admin.foods.AdminFoodsService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminFoodsServiceImpl implements AdminFoodsService {
 
@@ -32,6 +34,22 @@ public class AdminFoodsServiceImpl implements AdminFoodsService {
         dtoFoods.setPrice(dbFoods.getPrice());
 
         return dtoFoods;
+    }
+
+    @Override
+    public List<DtoFoods> getAllFoods() {
+
+        List<Foods> foodsList = foodsRepository.findAll();
+        List<DtoFoods> dtoFoodsList = foodsList.stream().map(foods -> {
+            DtoFoods dtoFoods = new DtoFoods();
+            dtoFoods.setFoodId(foods.getFoodId());
+            dtoFoods.setFoodName(foods.getFoodName());
+            dtoFoods.setDescription(foods.getDescription());
+            dtoFoods.setPrice(foods.getPrice());
+            return dtoFoods;
+        }).toList();
+
+        return dtoFoodsList;
     }
 
 }

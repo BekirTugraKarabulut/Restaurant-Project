@@ -5,10 +5,9 @@ import com.restaurant.dto.DtoAddDesserts;
 import com.restaurant.dto.DtoDesserts;
 import com.restaurant.service.admin.desserts.AdminDessertsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/admin")
@@ -25,6 +24,12 @@ public class AdminDessertsControllerImpl implements AdminDessertsController {
     @PostMapping(path = "/add/desserts")
     public DtoDesserts saveDesserts(@RequestBody DtoAddDesserts dtoAddDesserts) {
         return adminDessertsService.saveDesserts(dtoAddDesserts);
+    }
+
+    @Override
+    @GetMapping(path = "/get/desserts")
+    public List<DtoDesserts> getAllDesserts() {
+        return adminDessertsService.getAllDesserts();
     }
 
 }

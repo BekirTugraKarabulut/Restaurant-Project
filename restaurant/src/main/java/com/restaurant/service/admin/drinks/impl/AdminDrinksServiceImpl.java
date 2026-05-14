@@ -7,6 +7,9 @@ import com.restaurant.repository.DrinksRepository;
 import com.restaurant.service.admin.drinks.AdminDrinksService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AdminDrinksServiceImpl implements AdminDrinksService {
 
@@ -32,5 +35,28 @@ public class AdminDrinksServiceImpl implements AdminDrinksService {
         dtoDrinks.setPrice(savedDrinks.getPrice());
 
         return dtoDrinks;
+    }
+
+    @Override
+    public List<DtoDrinks> getAllDrinks() {
+
+        List<Drinks> drinksList = drinksRepository.findAll();
+        List<DtoDrinks> dtoDrinksList = new ArrayList<>();
+
+        if(drinksList.isEmpty()){
+            throw new RuntimeException("No Drinks found");
+        }else{
+            for (Drinks drinks : drinksList) {
+                DtoDrinks dtoDrinks = new DtoDrinks();
+                dtoDrinks.setDrinkId(drinks.getDrinkId());
+                dtoDrinks.setDrinkName(drinks.getDrinkName());
+                dtoDrinks.setDescription(drinks.getDescription());
+                dtoDrinks.setPrice(drinks.getPrice());
+                dtoDrinksList.add(dtoDrinks);
+                return dtoDrinksList;
+            }
+        }
+
+        return null;
     }
 }
