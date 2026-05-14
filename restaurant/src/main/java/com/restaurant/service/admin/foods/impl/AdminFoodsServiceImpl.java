@@ -5,6 +5,7 @@ import com.restaurant.dto.DtoFoods;
 import com.restaurant.model.Foods;
 import com.restaurant.repository.FoodsRepository;
 import com.restaurant.service.admin.foods.AdminFoodsService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class AdminFoodsServiceImpl implements AdminFoodsService {
         return dtoFoods;
     }
 
+    @Cacheable(value = "foodsCache", key = "'allFoods'")
     @Override
     public List<DtoFoods> getAllFoods() {
 
