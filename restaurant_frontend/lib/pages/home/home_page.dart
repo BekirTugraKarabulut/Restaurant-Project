@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
                   }
 
                   return Text(
-                    "Hoş Geldiniz, ${snapshot.data}",
+                    "Hoş Geldiniz, ${snapshot.data} !",
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -226,10 +226,6 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
-        title: const Text(
-          "Tastyra",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal),
-        ),
         centerTitle: true,
         actions: [
           Padding(
