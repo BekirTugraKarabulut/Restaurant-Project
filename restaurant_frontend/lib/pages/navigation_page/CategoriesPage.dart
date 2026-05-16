@@ -74,13 +74,13 @@ class _CategoriespageState extends State<Categoriespage> {
 
   String? getItemImage(Map<String, dynamic> item) {
     if (selectedIndex == 0) {
-      return item["foodImage"];
+      return "images/${item["imageUrl"]}";
     } else if (selectedIndex == 1) {
-      return item["dessertImage"];
+      return "images/${item["imageUrl"]}";
     } else if (selectedIndex == 2) {
-      return item["drinkImage"];
+      return "images/${item["imageUrl"]}";
     } else {
-      return item["snackImage"];
+      return "images/${item["imageUrl"]}";
     }
   }
 
@@ -179,7 +179,7 @@ class _CategoriespageState extends State<Categoriespage> {
                       child:
                       ListTile(
                         leading: imageUrl != null && imageUrl.isNotEmpty
-                            ? Image.network(
+                            ? Image.asset(
                           imageUrl,
                           width: 55,
                           height: 55,

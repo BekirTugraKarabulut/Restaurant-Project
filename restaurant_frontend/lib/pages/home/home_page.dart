@@ -235,7 +235,7 @@ class _HomePageState extends State<HomePage> {
             }, icon: Icon(Icons.chat , color: Colors.white,)),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 10),
+            padding: const EdgeInsets.only(right: 20),
             child: SizedBox(
               height: 40,
               child: ClipRRect(
@@ -244,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                      onTap: () {
                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Profilepage(username: widget.username,)));
                      },
-                    child: Image.asset("images/account.jpeg")),
+                    child: Icon(Icons.account_box_rounded , color: Colors.white,)),
               ),
             ),
           )
