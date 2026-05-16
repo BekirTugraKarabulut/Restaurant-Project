@@ -208,7 +208,6 @@ class _CategoriespageState extends State<Categoriespage> {
                         }, child: Text("Sepete Ekle" , style: TextStyle(color: Colors.white),)),
                         subtitle: Text("${getItemPrice(item)} TL"),
                       ),
-
                     );
                   },
                 );

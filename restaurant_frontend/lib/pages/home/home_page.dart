@@ -262,7 +262,6 @@ class _HomePageState extends State<HomePage> {
           });
         },
         items: const [
-
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: "Anasayfa",
