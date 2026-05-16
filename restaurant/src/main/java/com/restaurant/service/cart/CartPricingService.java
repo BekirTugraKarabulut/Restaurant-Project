@@ -15,8 +15,8 @@ public class CartPricingService {
     public Integer calculateTotalPrice(String username) {
         return cartsByUsernameService.getCartsByUsername(username)
                 .stream()
-                .map(DtoCart::getPrice)
-                .reduce(0 , Integer::sum);
+                .mapToInt(DtoCart::getPrice)
+                .sum();
     }
 
 }
