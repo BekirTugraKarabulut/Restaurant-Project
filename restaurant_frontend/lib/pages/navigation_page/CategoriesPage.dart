@@ -3,6 +3,7 @@ import 'package:restaurant_frontend/services/admin/DessertsService.dart';
 import 'package:restaurant_frontend/services/admin/DrinksService.dart';
 import 'package:restaurant_frontend/services/admin/FoodsService.dart';
 import 'package:restaurant_frontend/services/admin/SnacksService.dart';
+import 'package:restaurant_frontend/services/cart/CartService.dart';
 
 
 class Categoriespage extends StatefulWidget {
@@ -15,10 +16,12 @@ class Categoriespage extends StatefulWidget {
 }
 
 class _CategoriespageState extends State<Categoriespage> {
+
   final FoodService foodService = FoodService();
   final DessertsService dessertService = DessertsService();
   final DrinksService drinkService = DrinksService();
   final SnacksService snackService = SnacksService();
+  final CartService cartService = CartService();
 
   final List<String> categories = [
     "Yemekler",
@@ -81,6 +84,30 @@ class _CategoriespageState extends State<Categoriespage> {
       return "images/${item["imageUrl"]}";
     } else {
       return "images/${item["imageUrl"]}";
+    }
+  }
+
+  String getProductType() {
+    if (selectedIndex == 0) {
+      return "FOOD";
+    } else if (selectedIndex == 1) {
+      return "DESSERT";
+    } else if (selectedIndex == 2) {
+      return "DRINK";
+    } else {
+      return "SNACK";
+    }
+  }
+
+  int getProductId(Map<String, dynamic> item) {
+    if (selectedIndex == 0) {
+      return item["foodId"];
+    } else if (selectedIndex == 1) {
+      return item["dessertId"];
+    } else if (selectedIndex == 2) {
+      return item["drinkId"];
+    } else {
+      return item["snackId"];
     }
   }
 
@@ -203,8 +230,22 @@ class _CategoriespageState extends State<Categoriespage> {
                               borderRadius: BorderRadius.circular(12),
                             )
                           )
-                        ), onPressed: (){
+                        ), onPressed: () async {
+                          bool result = await cartService.addToCart(
+                            username: widget.username,
+                            productId: getProductId(item),
+                            productType: getProductType(),
+                          );
 
+                          if (result) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Ürün sepete eklendi")),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("Sepete ekleme başarısız")),
+                            );
+                          }
                         }, child: Text("Sepete Ekle" , style: TextStyle(color: Colors.white),)),
                         subtitle: Text("${getItemPrice(item)} TL"),
                       ),
