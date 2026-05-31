@@ -33,4 +33,7 @@ public class Cart {
     @Column(name = "product_type")
     private String productType;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
 }

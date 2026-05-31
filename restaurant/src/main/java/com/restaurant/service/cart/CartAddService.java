@@ -42,6 +42,7 @@ public class CartAddService {
 
                 cart.setPrice(foodsOptional.get().getPrice());
                 cart.setProductName(foodsOptional.get().getFoodName());
+                cart.setImageUrl(foodsOptional.get().getImageUrl());
 
                 Optional<Customer> customer = customerRepository.findByUsername(dtoCartUI.getUsername());
                 cart.setCustomer(customer.get());
@@ -61,6 +62,7 @@ public class CartAddService {
 
                 cart.setPrice(drinksOptional.get().getPrice());
                 cart.setProductName(drinksOptional.get().getDrinkName());
+                cart.setImageUrl(drinksOptional.get().getImageUrl());
 
                 Optional<Customer> customer = customerRepository.findByUsername(dtoCartUI.getUsername());
                 cart.setCustomer(customer.get());
@@ -80,6 +82,7 @@ public class CartAddService {
 
                 cart.setPrice(dessertsOptional.get().getPrice());
                 cart.setProductName(dessertsOptional.get().getDessertName());
+                cart.setImageUrl(dessertsOptional.get().getImageUrl());
 
                 Optional<Customer> customer = customerRepository.findByUsername(dtoCartUI.getUsername());
                 cart.setCustomer(customer.get());
@@ -99,6 +102,7 @@ public class CartAddService {
 
                 cart.setPrice(snacksOptional.get().getPrice());
                 cart.setProductName(snacksOptional.get().getSnackName());
+                cart.setImageUrl(snacksOptional.get().getImageUrl());
 
                 Optional<Customer> customer = customerRepository.findByUsername(dtoCartUI.getUsername());
                 cart.setCustomer(customer.get());

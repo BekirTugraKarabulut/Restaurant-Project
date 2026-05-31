@@ -37,6 +37,7 @@ public class CartsByUsernameService {
                 dtoCart.setProductName(cart.getProductName());
                 dtoCart.setPrice(cart.getPrice());
                 dtoCart.setProductType(cart.getProductType());
+                dtoCart.setImageUrl(cart.getImageUrl());
                 return dtoCart;
             }).toList();
 

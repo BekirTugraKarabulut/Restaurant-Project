@@ -21,4 +21,5 @@ public class DtoCart {
 
     private String productType;
 
+    private String imageUrl;
 }
