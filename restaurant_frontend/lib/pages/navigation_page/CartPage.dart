@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_frontend/pages/process/OrderPage.dart';
 import 'package:restaurant_frontend/services/cart/CartService.dart';
 
 class Cartpage extends StatefulWidget {
@@ -158,7 +159,7 @@ class _CartpageState extends State<Cartpage> {
                     ),
                   )
                   ,onPressed: (){
-
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Orderpage(username: widget.username)));
                   }, child: Text("Siparişi Onayla" , style: TextStyle(
                       color: Colors.white ,
                       fontWeight: FontWeight.bold,
