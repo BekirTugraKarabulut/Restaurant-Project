@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "address")
 @Data
@@ -26,5 +28,8 @@ public class Address {
     @ManyToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
     private Customer customer;
+
+    @OneToMany(mappedBy = "address" , cascade = CascadeType.ALL)
+    private List<Pay> pay;
 
 }
