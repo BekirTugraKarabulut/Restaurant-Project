@@ -102,8 +102,8 @@ class _LoginState extends State<Login> {
                         bool response = await loginService.login(username.text, password.text);
                         if(response){
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("Giriş Başarılı"),
-                            action: SnackBarAction(label: "Tamam", onPressed: (){}),
+                            SnackBar(backgroundColor: Colors.red ,content: Text("Giriş Başarılı" , style: TextStyle(color: Colors.black),),
+                            action: SnackBarAction(textColor: Colors.black ,label: "Tamam", onPressed: (){}),
                             )
                           );
                           Navigator.pushAndRemoveUntil(context,
