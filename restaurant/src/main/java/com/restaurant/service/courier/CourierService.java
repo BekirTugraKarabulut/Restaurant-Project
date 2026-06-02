@@ -35,7 +35,7 @@ public class CourierService {
 
             List<Pay> pays = payRepository.findByCustomer_Username(username);
             courier.setCustomer(customer.get());
-            courier.setPrice(pays.get(0).getPrice());
+            courier.setPrice(pays.get(pays.size()-1).getPrice());
 
             for(int i = 0; i < 3 ; i++) {
 
