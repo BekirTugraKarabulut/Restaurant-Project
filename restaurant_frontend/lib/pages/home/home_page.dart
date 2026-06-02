@@ -3,6 +3,7 @@ import 'package:restaurant_frontend/pages/navigation_page/AboutUsPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CartPage.dart';
 import 'package:restaurant_frontend/pages/navigation_page/CategoriesPage.dart';
 import 'package:restaurant_frontend/pages/process/AddressAddPage.dart';
+import 'package:restaurant_frontend/pages/process/CustomerDeliveryPage.dart';
 import 'package:restaurant_frontend/pages/process/ProfilePage.dart';
 import 'package:restaurant_frontend/services/customer/GetNameService.dart';
 import 'package:restaurant_frontend/services/favorites/FavoritesService.dart';
@@ -177,23 +178,6 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ],
                                   ),
-                                  ElevatedButton(
-                                    style: ButtonStyle(
-                                        shape: WidgetStatePropertyAll(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                        backgroundColor: const WidgetStatePropertyAll(
-                                          Colors.red,
-                                        )
-                                    ),
-                                    onPressed: (){},
-                                    child: const Text(
-                                      "Ekle",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  )
                                 ],
                               ),
                             ),
@@ -231,8 +215,8 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(onPressed: (){
-
-            }, icon: Icon(Icons.chat , color: Colors.white,)),
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Customerdeliverypage(username: widget.username)));
+            }, icon: Icon(Icons.reorder , color: Colors.white,)),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20),

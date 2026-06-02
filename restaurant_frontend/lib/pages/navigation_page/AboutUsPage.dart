@@ -56,7 +56,7 @@ class _AboutuspageState extends State<Aboutuspage> {
                 ],
               ),
               const SizedBox(height: 80,),
-              Text("© 2024 Restoranımız. Tüm hakları saklıdır.",)
+              Text("© 2026 Restoranımız. Tüm hakları saklıdır.",)
             ],
           ),
         ),

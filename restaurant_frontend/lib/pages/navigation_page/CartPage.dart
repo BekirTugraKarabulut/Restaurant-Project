@@ -50,7 +50,15 @@ class _CartpageState extends State<Cartpage> {
                 }
 
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text("Sepet boş"));
+                  return Center(
+                    child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Sepet Boş! " , style: TextStyle(color:  Colors.black , fontWeight: FontWeight.bold  , fontSize: 20),),
+                        Icon(Icons.search , color: Colors.black, size: 30,)
+
+                      ],
+                    ),
+                  );
                 }
 
                 final carts = snapshot.data!;
