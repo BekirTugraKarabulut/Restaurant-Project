@@ -1,14 +1,14 @@
 package com.restaurant.repository;
 
-import com.restaurant.model.Pay;
+import com.restaurant.model.Courier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface PayRepository extends JpaRepository<Pay , Long> {
+public interface CourierRepository extends JpaRepository<Courier, Long> {
 
-    List<Pay> findByCustomer_Username(String username);
+    List<Courier> findByCustomer_Username(String username);
 
 }

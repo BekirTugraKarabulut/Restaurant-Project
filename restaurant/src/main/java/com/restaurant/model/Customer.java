@@ -52,6 +52,9 @@ public class Customer implements UserDetails {
     @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL)
     private List<Pay> pay;
 
+    @OneToMany(mappedBy = "customer" , cascade = CascadeType.ALL)
+    private List<Courier> courier;
+
     @Override
     public String getUsername(){
         return username;

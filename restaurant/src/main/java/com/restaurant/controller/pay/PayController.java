@@ -1,8 +1,11 @@
 package com.restaurant.controller.pay;
 
 import com.restaurant.dto.DtoCreditCart;
+import com.restaurant.dto.DtoPay;
 import com.restaurant.service.pay.PayService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/pay")
@@ -15,8 +18,13 @@ public class PayController {
     }
 
     @PostMapping(path = "/{username}")
-    public boolean payByUsername(@PathVariable(name = "username" , required = true) String username ,@RequestBody DtoCreditCart dtoCreditCart){
+    public boolean payByUsername(@PathVariable(name = "username" , required = true) String username ,@RequestBody DtoCreditCart dtoCreditCart) throws InterruptedException {
         return payService.payByUsername(username, dtoCreditCart);
+    }
+
+    @GetMapping(path = "/list/{username}")
+    public List<DtoPay> getOrdersByUsername(@PathVariable(name = "username" , required = true) String username){
+        return payService.getOrdersByUsername(username);
     }
 
 }
