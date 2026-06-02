@@ -17,7 +17,6 @@ Proje kapsamında:
 - JWT tabanlı kimlik doğrulama
 - PostgreSQL ile ilişkisel veritabanı yönetimi
 - Redis ile cache kullanımı
-- Docker ile servisleri ayağa kaldırma
 - Katmanlı mimari
 - DTO yapısı
 - Sepet ve sipariş yönetimi
